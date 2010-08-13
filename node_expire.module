@@ -16,13 +16,14 @@ function node_expire_cron() {
   if ($query = db_query('SELECT n.nid FROM {node} n
       JOIN {node_expire} ne ON n.nid = ne.nid
       WHERE ne.expired = 0 AND ne.expire <= %d', time())) {
+    $nids = array();
     while ($node = db_fetch_object($query)) {
       $nids[] = $node->nid;
       $node = node_load($node->nid);
       rules_invoke_event('node_expired', array('node' => &$node));
     }
     module_load_include('rules.inc', 'node_expire');
-    node_expire_set_expired($nids, TRUE);
+    node_expire_set_expired($nids);
   }
 }
 
