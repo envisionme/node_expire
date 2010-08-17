@@ -4,3 +4,9 @@ dependencies[]  = "rules"
 description     = "Set a timer into your content, allowing you to perform customized actions."
 name            = "Node expire"
 package         = "Workflow"
+; Information added by drupal.org packaging script on 2010-08-14
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "node_expire"
+datestamp = "1281744855"
+

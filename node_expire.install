@@ -59,7 +59,7 @@ function node_expire_uninstall() {
 }
 
 /**
- * Implementation of hook_uninstall().
+ * Implementation of hook_update_N().
  *
  * Include the max date allowed values. Only new nodes
  * (or edited ones) will be affected
@@ -74,4 +74,15 @@ function node_expire_update_6200() {
 
   $update[] = 'Include the max date allowed values. Only new nodes (or edited ones) will be affected';
   return $update;
+}
+
+/**
+ * Implementation of hook_update_N().
+ *
+ *
+ */
+function node_expire_update_6206() {
+  $ret = array();
+  db_add_field($ret, 'node_expire', 'lastnotify', array('type' => 'int', 'default' => 0, 'unsigned' => TRUE, 'not null' => TRUE)); 
+  return $ret;
 }
