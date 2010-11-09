@@ -85,21 +85,9 @@ function node_expire_rules_expired_check($node) {
  *   Object. The Node object.
  */
 function node_expire_rules_expired_check_lastnotify($node) {
-  return (!empty($node->expire) && $node->expire <= time() && $node->expired == 1 && $node->lastnotify <= (time() - (1 * 24 * 60 * 60)));
+  return (!empty($node->expire) && $node->expire <= time() && $node->expired == 1 && $node->lastnotify <= (time() - (14 * 24 * 60 * 60)));
 }
 
-/**
- * Set the "Expired" flag on nodes after they are called by Rules module
- *
- * @param $nids
- *   Array. An array list with all node IDs
- *   that should set the expired flag.
- */
-function node_expire_set_expired($nids) {
-  if ($nids) {
-    db_query("UPDATE {node_expire} SET expired = 1 WHERE nid IN (" . implode(',', $nids) . ")");
-  }
-}
 
 /**
  * Unset the "Expired" flag on nodes.
@@ -109,9 +97,7 @@ function node_expire_set_expired($nids) {
  *   that should unset the expired flag.
  */
 function node_expire_unset_expired($nids) {
-  if ($nids->nid) {
-    db_query("UPDATE {node_expire} SET expired = 0 WHERE nid = '" . $nids->nid . "'");
-  }
+  db_query("UPDATE {node_expire} SET expired = '0' WHERE nid = '" . $nids->nid . "'");
 }
 
 /**
@@ -122,7 +108,5 @@ function node_expire_unset_expired($nids) {
  *   that should update lastnotify.
  */
 function node_expire_update_lastnotify($nids) {
-  if ($nids->nid) {
-    db_query("UPDATE {node_expire} SET lastnotify = '" . time() . "' WHERE nid = '" . $nids->nid . "'");
-  }
+  db_query("UPDATE {node_expire} SET lastnotify = '" . time() . "' WHERE nid = '" . $nids->nid . "'");
 }

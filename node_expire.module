@@ -19,11 +19,10 @@ function node_expire_cron() {
     $nids = array();
     while ($node = db_fetch_object($query)) {
       $nids[] = $node->nid;
+      node_expire_set_expired($node->nid);
       $node = node_load($node->nid);
       rules_invoke_event('node_expired', array('node' => &$node));
     }
-    module_load_include('rules.inc', 'node_expire');
-    node_expire_set_expired($nids);
   }
 }
 
@@ -106,4 +105,13 @@ function node_expire_views_api() {
     'api' => 2,
     'path' => drupal_get_path('module', 'node_expire'),
   );
+}
+
+/**
+ *
+ * @param $nids
+ *   node ID that should set the expired flag.
+ */
+function node_expire_set_expired($nid) {
+  db_query("UPDATE {node_expire} SET expired = '1' WHERE nid = '" . $nid . "'");
 }
