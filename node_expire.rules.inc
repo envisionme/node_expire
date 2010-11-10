@@ -48,7 +48,7 @@ function node_expire_rules_condition_info() {
         'node'      => array('type' => 'node', 'label' => t('Content')),
       ),
       'label'     => t('Content is expired: Check lastnotify'),
-      'help'      => 'Evaluates to TRUE, if the given content is expired and lastnotify >= + 2 weeks.',
+      'help'      => 'Evaluates to TRUE, if the given content is expired and lastnotified 2 weeks ago.',
       'module'    => 'Node',
     ),
   );
@@ -97,7 +97,7 @@ function node_expire_rules_expired_check_lastnotify($node) {
  *   that should unset the expired flag.
  */
 function node_expire_unset_expired($nids) {
-  db_query("UPDATE {node_expire} SET expired = '0' WHERE nid = '" . $nids->nid . "'");
+  db_query("UPDATE {node_expire} SET expired = '0', lastnotify = '0' WHERE nid = '" . $nids->nid . "'");
 }
 
 /**
