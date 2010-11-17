@@ -79,10 +79,10 @@ function node_expire_update_6200() {
 /**
  * Implementation of hook_update_N().
  *
- *
+ * New field 'lastnotify'. Holds last notified timestamp. 
  */
-function node_expire_update_6206() {
+function node_expire_update_62001() {
   $ret = array();
-  db_add_field($ret, 'node_expire', 'lastnotify', array('type' => 'int', 'default' => 0, 'unsigned' => TRUE, 'not null' => TRUE)); 
+  db_add_field($ret, 'node_expire', 'lastnotify', array('type' => 'int', 'default' => 0, 'unsigned' => TRUE, 'not null' => TRUE), array('indexes' => array('lastnotify' => array('lastnotify')))); 
   return $ret;
 }
