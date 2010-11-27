@@ -81,7 +81,7 @@ function node_expire_update_6200() {
  *
  * New field 'lastnotify'. Holds last notified timestamp. 
  */
-function node_expire_update_62001() {
+function node_expire_update_6201() {
   $ret = array();
   db_add_field($ret, 'node_expire', 'lastnotify', array('type' => 'int', 'default' => 0, 'unsigned' => TRUE, 'not null' => TRUE), array('indexes' => array('lastnotify' => array('lastnotify')))); 
   return $ret;
