@@ -83,6 +83,8 @@ function node_expire_update_6200() {
  */
 function node_expire_update_6201() {
   $ret = array();
-  db_add_field($ret, 'node_expire', 'lastnotify', array('type' => 'int', 'default' => 0, 'unsigned' => TRUE, 'not null' => TRUE), array('indexes' => array('lastnotify' => array('lastnotify')))); 
+  if (!db_column_exists('node_expire', 'lastnotify')) {
+    db_add_field($ret, 'node_expire', 'lastnotify', array('type' => 'int', 'default' => 0, 'unsigned' => TRUE, 'not null' => TRUE), array('indexes' => array('lastnotify' => array('lastnotify'))));
+  }
   return $ret;
 }
