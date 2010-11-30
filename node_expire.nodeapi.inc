@@ -60,7 +60,9 @@ function _node_expire_nodeapi(&$ntypes, &$node, $op, $a3 = NULL, $a4 = NULL) {
         db_query('DELETE FROM {node_expire} WHERE nid = %d', $node->nid);
         // should we create a new record?
         if ($node->expire) {
-          $node->expire = strtotime($node->expire);
+          if (strtotime($node->expire)) {
+            $node->expire = strtotime($node->expire);
+          }          
           $node->expired = FALSE;
           drupal_write_record('node_expire', $node);
         }
