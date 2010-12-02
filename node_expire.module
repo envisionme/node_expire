@@ -113,5 +113,5 @@ function node_expire_views_api() {
  *   node ID that should set the expired flag.
  */
 function node_expire_set_expired($nid) {
-  db_query("UPDATE {node_expire} SET expired = '1' WHERE nid = '" . $nid . "'");
+  db_query("UPDATE {node_expire} SET expired = '1', lastnotify = '" . time() . "' WHERE nid = '" . $nid . "' AND lastnotify = '0'");
 }
