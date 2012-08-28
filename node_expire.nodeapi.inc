@@ -25,6 +25,7 @@ function _node_expire_nodeapi(&$ntypes, &$node, $op, $a3 = NULL, $a4 = NULL) {
 
     case 'prepare':
       // To prevent default value 1969-12-31 check also $ntypes['default'].
+      if (isset($ntypes['default']))
       if (!isset($node->expire) && $ntypes['default']) {
         $node->expire = format_date(strtotime($ntypes['default']), 'custom', NODE_EXPIRE_FORMAT);
       }
@@ -62,7 +63,7 @@ function _node_expire_nodeapi(&$ntypes, &$node, $op, $a3 = NULL, $a4 = NULL) {
         if ($node->expire) {
           if (strtotime($node->expire)) {
             $node->expire = strtotime($node->expire);
-          }          
+          }
           $node->expired = FALSE;
           drupal_write_record('node_expire', $node);
         }

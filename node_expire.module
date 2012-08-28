@@ -82,6 +82,7 @@ function node_expire_form_node_type_form_alter(&$form, &$form_state) {
 function node_expire_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
   // Only deal with node types that have the Node expire feature enabled
   $ntypes = variable_get('node_expire_ntypes', array());
+  if (!empty($ntypes[$node->type]))
   if (!$ntypes = $ntypes[$node->type]) {
     return;
   }
