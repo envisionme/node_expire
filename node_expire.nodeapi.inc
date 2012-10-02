@@ -76,7 +76,7 @@ function _node_expire_nodeapi(&$ntypes, &$node, $op, $a3 = NULL, $a4 = NULL) {
   }
 }
 
-function _node_expire_form_alter_nodeform(&$ntypes, &$form, &$form_state, $form_id) {
+function _node_expire_form_alter_nodeform(&$ntypes, &$form, $form_state, $form_id) {
   // Check if the Node expire feature is enabled for the node type
   $node = isset($form['#node']) ? $form['#node'] : NULL;
 
