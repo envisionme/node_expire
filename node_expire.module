@@ -32,7 +32,7 @@ function node_expire_cron() {
  * Add expiration options to the node entry forms
  */
 function node_expire_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($form['type'])
+  if (isset($form['type']['#value']) && isset($ntypes[$form['type']['#value']])
       and $form['type']['#value'] .'_node_form' == $form_id
       and $ntypes = variable_get('node_expire_ntypes', array())
       and $ntypes = $ntypes[$form['type']['#value']]) {
